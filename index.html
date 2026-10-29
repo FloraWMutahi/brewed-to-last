@@ -95,22 +95,59 @@
         .card p { font-size: 17px; line-height: 1.65; color: #665255; margin: 0; }
         .icon { font-size: 38px; color: var(--rose); background: rgba(157, 112, 109, 0.1); width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; border-radius: 16px; margin-bottom: 10px; }
         
-        /* Showcase Section featuring the Penthouse Reading Nook Image */
+        /* Interactive Card-Spread / Fan Showcase Section */
         .showcase-section { background: var(--gradient-subtle); display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
         .showcase-text h2 { text-align: left; }
         .showcase-text .intro { margin: 0 0 30px 0; text-align: left; }
-        .secondary-book-wrapper {
-            width: min(440px, 95%);
+        
+        /* Fan Container Setup (height follows the centre card so nothing overlaps) */
+        .card-fan-wrapper {
+            position: relative;
+            width: min(440px, 100%);
             margin: auto;
+            cursor: pointer;
+            outline: none;
+        }
+        .fan-card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
             background: #ffffff;
             border-radius: 20px;
-            padding: 16px;
-            box-shadow: 15px 25px 50px rgba(41, 30, 32, 0.12);
-            transform: rotate(2deg);
-            transition: transform 0.5s;
+            padding: 14px;
+            box-shadow: 15px 25px 50px rgba(41, 30, 32, 0.15);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+            user-select: none;
         }
-        .secondary-book-wrapper:hover { transform: rotate(0deg) scale(1.02); }
-        .secondary-book-wrapper img { width: 100%; height: auto; display: block; border-radius: 12px; }
+        .fan-card img { width: 100%; height: auto; display: block; border-radius: 12px; }
+        
+        /* Default Stacked Resting States */
+        .fan-card.left-card { transform: rotate(-3deg) translateY(5px) scale(0.96); z-index: 1; opacity: 0.85; filter: brightness(0.95); }
+        .fan-card.right-card { transform: rotate(3deg) translateY(10px) scale(0.93); z-index: 1; opacity: 0.85; filter: brightness(0.95); }
+        .fan-card.center-card { position: relative; transform: rotate(0deg) translateY(0px) scale(1); z-index: 3; }
+
+        /* Fan-Out States: hover on desktop, tap on phones */
+        .card-fan-wrapper:hover .fan-card.left-card,
+        .card-fan-wrapper:focus .fan-card.left-card {
+            transform: translateX(-45px) rotate(-12deg) translateY(-10px) scale(0.98);
+            opacity: 1;
+            filter: brightness(1);
+            box-shadow: -20px 30px 60px rgba(41, 30, 32, 0.2);
+        }
+        .card-fan-wrapper:hover .fan-card.right-card,
+        .card-fan-wrapper:focus .fan-card.right-card {
+            transform: translateX(45px) rotate(12deg) translateY(-10px) scale(0.98);
+            opacity: 1;
+            filter: brightness(1);
+            box-shadow: 20px 30px 60px rgba(41, 30, 32, 0.2);
+        }
+        .card-fan-wrapper:hover .fan-card.center-card,
+        .card-fan-wrapper:focus .fan-card.center-card {
+            transform: translateY(-20px) scale(1.03);
+            z-index: 5;
+            box-shadow: 0 35px 70px rgba(41, 30, 32, 0.25);
+        }
 
         .endorsements { background: #fff; }
         .endorsement-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; max-width: 1050px; margin: 0 auto; }
@@ -141,7 +178,8 @@
         @media(max-width: 900px) {
             .hero, .showcase-section { grid-template-columns: 1fr; padding-top: 60px; text-align: center; }
             .hero .actions { justify-content: center; }
-            .hero-image-wrapper, .secondary-book-wrapper { margin: 32px auto; }
+            .hero-image-wrapper, .card-fan-wrapper { margin: 32px auto; }
+            .card-fan-wrapper { width: min(340px, 80%); }
             .cards, .purchase .cards, .endorsement-grid { grid-template-columns: 1fr; }
             nav a { margin-left: 14px; font-size: 14px; }
             .showcase-text h2, .showcase-text .intro { text-align: center; }
@@ -162,15 +200,15 @@
     </header>
 
     <main>
-        <!-- Hero Section with your original Hero Image -->
+        <!-- Hero Section with original Hero Image -->
         <section class="hero animate">
             <div>
                 <span class="eyebrow">Fuelling Your Entrepreneurial Journey</span>
                 <h1>BREWED<br>TO LAST</h1>
                 <h2>An Entrepreneur's Playbook for Building a Lasting Legacy</h2>
-                <p>Starting is easy. Lasting is rare. Drawing on three decades of firsthand experience, pioneer of Kenya's first flavored tea brand <b>Flora Mutahi</b> unpacks the journey from spark to scale with candid, battle-tested strategies.</p>
+                <p>Starting is easy. Lasting is rare. Drawing on three decades of firsthand experience, pioneer of Kenya's first flavoured tea brand <b>Flora Mutahi</b> unpacks the journey from spark to scale with candid, battle-tested strategies.</p>
                 <div class="actions">
-                    <a class="btn" href="https://api.whatsapp.com/message/A32RHMRUDJUWL1?autoload=1&app_absent=0" target="_blank">Order via WhatsApp</a>
+                    <a class="btn" href="https://api.whatsapp.com/message/A32RHMRUDJUWL1?autoload=1&app_absent=0" target="_blank" rel="noopener noreferrer">Order via WhatsApp</a>
                     <a class="btn light" href="#story">Explore the Book</a>
                 </div>
             </div>
@@ -203,10 +241,21 @@
             </div>
         </section>
 
-        <!-- Secondary Showcase Section featuring the Penthouse Reading Nook Image -->
+        <!-- Interactive Card-Spread Showcase Section -->
         <section class="section showcase-section">
-            <div class="secondary-book-wrapper">
-                <img src="penthouse-reading-nook.png" alt="Brewed to Last Executive Edition in Penthouse Setting">
+            <div class="card-fan-wrapper" tabindex="0" title="Hover or tap to fan out the images">
+                <!-- Left Fanned Card: Penthouse Reading Nook -->
+                <div class="fan-card left-card">
+                    <img src="penthouse-reading-nook.png" alt="Brewed to Last on a wooden table beside a cup of Melvins tea, with a city view">
+                </div>
+                <!-- Right Fanned Card: Misty Veranda -->
+                <div class="fan-card right-card">
+                    <img src="tea-farm-veranda.png" alt="Brewed to Last on a veranda table overlooking misty tea fields">
+                </div>
+                <!-- Center Anchor Card: Cozy Library Stack -->
+                <div class="fan-card center-card">
+                    <img src="library-book-stack.png" alt="A stack of Brewed to Last books on a library desk">
+                </div>
             </div>
             <div class="showcase-text">
                 <span class="eyebrow" style="color: var(--rose);">Built for the Real World</span>
@@ -261,14 +310,14 @@
                     <h3>Softback</h3>
                     <div class="price">KSh 2,800</div>
                     <p>Bring the battle-tested lessons into your everyday entrepreneurial journey.</p>
-                    <a class="btn" href="https://api.whatsapp.com/message/A32RHMRUDJUWL1?autoload=1&app_absent=0" target="_blank" style="margin-top: 24px; width: 100%;">Order via WhatsApp</a>
+                    <a class="btn" href="https://api.whatsapp.com/message/A32RHMRUDJUWL1?autoload=1&app_absent=0" target="_blank" rel="noopener noreferrer" style="margin-top: 24px; width: 100%;">Order via WhatsApp</a>
                 </article>
                 <article class="card" style="border: 2px solid var(--gold);">
                     <span class="retailer-badge" style="background: var(--gold); color: #fff;">Collector's Choice</span>
                     <h3>Hardback</h3>
                     <div class="price">KSh 3,500</div>
                     <p>A keepsake edition for your executive library or a thoughtful professional gift.</p>
-                    <a class="btn" href="https://api.whatsapp.com/message/A32RHMRUDJUWL1?autoload=1&app_absent=0" target="_blank" style="margin-top: 24px; width: 100%;">Order via WhatsApp</a>
+                    <a class="btn" href="https://api.whatsapp.com/message/A32RHMRUDJUWL1?autoload=1&app_absent=0" target="_blank" rel="noopener noreferrer" style="margin-top: 24px; width: 100%;">Order via WhatsApp</a>
                 </article>
             </div>
             
@@ -281,12 +330,12 @@
         <section class="section contact">
             <h2>For corporate and bulk orders</h2>
             <p class="intro">Interested in copies for your team, leadership programme, book club or industry event? Get in touch with us directly.</p>
-            <a class="btn" href="https://api.whatsapp.com/message/A32RHMRUDJUWL1?autoload=1&app_absent=0" target="_blank">Request Bulk Order Details</a>
+            <a class="btn" href="https://api.whatsapp.com/message/A32RHMRUDJUWL1?autoload=1&app_absent=0" target="_blank" rel="noopener noreferrer">Request Bulk Order Details</a>
         </section>
     </main>
 
     <footer>
-        © 2026 Flora Mutahi · <a href="https://floramutahi.com/" target="_blank">Visit Flora Mutahi</a>
+        © 2026 Flora Mutahi · <a href="https://floramutahi.com/" target="_blank" rel="noopener noreferrer">Visit Flora Mutahi</a>
     </footer>
 </body>
 </html>
