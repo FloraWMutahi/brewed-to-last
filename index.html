@@ -240,26 +240,50 @@
             margin: 0 0 25px 0;
         }
 
-        /* Nuria Bookstore Link Styling */
-        .nuria-note { 
-            margin-top: 30px; 
-            font-size: 18px; 
-            color: #fff; 
-            background: rgba(0,0,0,0.15); 
-            padding: 22px 30px; 
-            border-radius: 16px; 
-            display: inline-block; 
-            backdrop-filter: blur(5px); 
-            border: 1px solid rgba(255,255,255,0.2); 
+        /* Dual Retailer Cards Styling */
+        .retailers-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 900px;
+            margin: 30px auto 0 auto;
         }
-        .nuria-note a { 
-            color: var(--gold-light); 
-            text-decoration: underline; 
-            font-weight: 700; 
-            transition: color 0.3s ease;
+        .retailer-card {
+            background: rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: left;
+            backdrop-filter: blur(5px);
         }
-        .nuria-note a:hover { 
-            color: #ffffff; 
+        .retailer-card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--gold-light);
+            display: block;
+            margin-bottom: 8px;
+        }
+        .retailer-card p {
+            font-size: 14px;
+            color: #fcece9;
+            margin: 0 0 18px 0;
+            line-height: 1.5;
+        }
+        .btn.light-small {
+            display: inline-block;
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid var(--gold-light);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .btn.light-small:hover {
+            background: var(--gold);
+            color: var(--dark);
+            border-color: var(--gold);
         }
 
         .contact { text-align: center; background: var(--cream); }
@@ -272,10 +296,10 @@
             .hero .actions { justify-content: center; }
             .hero-image-wrapper, .card-fan-wrapper { margin: 32px auto; }
             .card-fan-wrapper { width: min(340px, 80%); }
-            .cards, .purchase .cards, .mpesa-grid, .endorsement-grid { grid-template-columns: 1fr; }
+            .cards, .purchase .cards, .mpesa-grid, .endorsement-grid, .retailers-wrapper { grid-template-columns: 1fr; }
             nav a { margin-left: 14px; font-size: 14px; }
             .showcase-text h2, .showcase-text .intro { text-align: center; }
-            .mpesa-container { text-align: center; }
+            .mpesa-container, .retailer-card { text-align: center; }
             .mpesa-header { justify-content: center; }
         }
     </style>
@@ -436,8 +460,18 @@
                 <a class="btn" href="https://api.whatsapp.com/message/A32RHMRUDJUWL1?autoload=1&app_absent=0" target="_blank" rel="noopener noreferrer" style="width: 100%; text-align: center;">Send M-Pesa Confirmation via WhatsApp</a>
             </div>
             
-            <div class="nuria-note">
-                📚 Prefer physical bookstore pickup or delivery? <a href="https://nuriakenya.com/product/brewed-to-last-an-entrepreneurs-play-book-for-building-a-lasting-legacy-by-flora-mutahi/" target="_blank" rel="noopener noreferrer">Buy directly on Nuria Kenya →</a>
+            <!-- Alternative Global & Local Retailers -->
+            <div class="retailers-wrapper">
+                <div class="retailer-card">
+                    <span class="retailer-card-title">🌎 International & Kindle</span>
+                    <p>Order paperbacks or digital Kindle editions globally via Amazon.</p>
+                    <a class="btn light-small" href="https://www.amazon.com/BREWED-LAST-Entrepreneurs-Playbook-Building/dp/B0HLPYZS2V" target="_blank" rel="noopener noreferrer">Buy on Amazon →</a>
+                </div>
+                <div class="retailer-card">
+                    <span class="retailer-card-title">🇰🇪 Local Bookstore Pickup</span>
+                    <p>Order physical copies locally across Kenya via Nuria Bookstore.</p>
+                    <a class="btn light-small" href="https://nuriakenya.com/product/brewed-to-last-an-entrepreneurs-play-book-for-building-a-lasting-legacy-by-flora-mutahi/" target="_blank" rel="noopener noreferrer">Buy on Nuria Kenya →</a>
+                </div>
             </div>
         </section>
 
