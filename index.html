@@ -21,6 +21,7 @@
             --gradient-subtle: linear-gradient(180deg, #faf5ed 0%, #f0e6dc 100%);
         }
         * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body { margin: 0; font-family: 'Plus Jakarta Sans', Arial, sans-serif; color: var(--dark); background: var(--cream); overflow-x: hidden; }
         a { text-decoration: none; }
         
@@ -46,6 +47,12 @@
             display: flex;
             align-items: center;
             gap: 14px;
+            text-decoration: none;
+            color: inherit;
+            transition: opacity 0.3s ease;
+        }
+        .brand-container:hover {
+            opacity: 0.85;
         }
         .brand-container img {
             height: 44px;
@@ -305,11 +312,11 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="brand-container">
+    <header id="top">
+        <a href="#top" class="brand-container" title="Back to top">
             <img src="logo.jpeg" alt="Flora Mutahi Logo">
             <div class="brand">FLORA MUTAHI</div>
-        </div>
+        </a>
         <nav>
             <a href="#story">The Book</a>
             <a href="#endorsements">Praise</a>
